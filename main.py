@@ -1,6 +1,6 @@
 from io import BytesIO
 from flask import Flask, render_template, request
-from utils import load_device, load_model, predict, load_image
+from utils import load_device, import_model, predict, load_image
 from PIL import Image
 import os
 
@@ -11,7 +11,7 @@ def read_image(file):
 app = Flask(__name__)
 
 device = load_device()
-model = load_model(device)
+model = import_model(bucket="mbenxsalha", key="diffusion/state_dict.pickle", device=device)
 
 
 @app.route("/", methods=["GET", "POST"])
